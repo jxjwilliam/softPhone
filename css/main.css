@@ -1,0 +1,92 @@
+@media (min-width: 320px) and (max-width: 480px) {
+    body {
+        margin: auto;
+    }
+}
+
+body {
+    max-width: 480px;
+    min-width: 320px;
+    margin: auto;
+    font-size: 2rem;
+}
+
+.dialPanel {
+    margin-bottom: 30px;
+    margin-top: 30px;
+    background-color: #3493cd;
+    border: 1px solid #3aa3e3;
+    text-shadow: 1px 1px #2a76a4;
+    background: lightblue;
+    padding-bottom: 30px;
+}
+
+.dialPad {
+    background-color: #3493cd;
+    border: 1px solid #3aa3e3;
+    text-shadow: 1px 1px #2a76a4;
+    margin: 20px 10px 10px 10px;
+    font-size: 3rem;
+    vertical-align: middle;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dialPad span {
+    font-size: 1.5rem;
+}
+
+.dialPad div {
+    font-size: 1.5rem;
+}
+
+.dialButton {
+    background-color: #2AB27B;
+    border: 1px solid #2AB27B;
+    text-shadow: 1px 1px #1E7E57;
+    margin: 15px;
+    font-size: 3rem;
+    line-height: 6rem;
+    vertical-align: middle;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
+.dialing {
+    background-color: red;
+}
+
+form {
+    margin-top: 20px;
+}
+
+form input {
+    text-align: right;
+    padding-right: 10px;
+    font-weight: bolder;
+}
+
+div span.timer {
+    float: right;
+    margin-right: 10px;
+}
+
+span.status {
+    color: #5cb85c;
+}
+
+span.endCall {
+    color: red;
+}
+
+.callControl {
+    background-color: #3493cd;
+    border: 1px solid #3aa3e3;
+    text-shadow: 1px 1px #2a76a4;
+    margin: 20px 0px 10px 0px;
+    vertical-align: middle;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+}
