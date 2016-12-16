@@ -72,11 +72,11 @@ div span.timer {
     margin-right: 10px;
 }
 
-span.status {
+div.status {
     color: #5cb85c;
 }
 
-span.endCall {
+div.status.endCall {
     color: red;
 }
 

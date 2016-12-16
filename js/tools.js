@@ -36,8 +36,10 @@ var SoftPhoneTool = (function () {
         }, 1000);
     };
 
-    function stopTimer() {
+    function stopTimer(displayAt) {
+        displayAt = displayAt || 'span.timer';
         clearInterval(timer);
+        $(displayAt).html('');
     }
 
     return {
