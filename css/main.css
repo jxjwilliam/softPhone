@@ -90,3 +90,7 @@ div.status.endCall {
     text-align: center;
     cursor: pointer;
 }
+
+.phoneInValid {
+    color: red;
+}

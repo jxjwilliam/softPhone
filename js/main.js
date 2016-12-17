@@ -15,7 +15,23 @@
 
         var val = $(phoneNumber).val();
         if (number || number === 0) {
-            val = val + number;
+            if (!val) {
+                val = '+1 (';
+            }
+
+            if (val.match(/\((\d*)/)[1].length === 2) {
+                val = val + number + ') ';
+            }
+            else {
+                var t = val.match(/\)\s(\d*)/);
+                if (t && t[1] && t[1].toString().length === 2) {
+                    val = val + number + ' - ';
+                }
+                else {
+                    val = val + number;
+                }
+            }
+
             $(phoneNumber).val(val);
         }
         return val;
@@ -23,10 +39,18 @@
 
     function _phoneCheck() {
         var val = _phoneNumber();
-        if (val.length === 10 || val.length === 11) {
+        val = val.replace(/[\(\)\s\-\+]*/g, '').replace(/^1/,'');
+
+        if (/\b\d{10}\b/.test(val)) {
+            _phoneValid(true);
+            _phoneStatus('ready');
             return true;
         }
-        return false;
+        else {
+            _phoneStatus('invalid');
+            _phoneValid(false);
+            return false;
+        }
     }
 
     function _dialButton() {
@@ -53,6 +77,7 @@
             mute: 'Muted',
             hold: 'OnHold',
             callEnd: 'Call Ended',
+            invalid: 'need 10/11 digital'
         };
 
         return function (status) {
@@ -64,6 +89,17 @@
         }
     }(rootNode));
 
+    var _phoneValid = (function (rootNode) {
+        var phoneStatus = rootNode + ' span.phoneStatus';
+        return function (valid) {
+            if (valid) {
+                $(phoneStatus).removeClass('phoneInValid');
+            }
+            else {
+                $(phoneStatus).addClass('phoneInValid');
+            }
+        }
+    }(rootNode));
 
     var init = (function () {
 
@@ -133,7 +169,7 @@
                     SoftPhoneTool.stopTimer(rootNode + ' span.timer');
                     _phoneStatus('ready');
                     _phoneNumber(0, true);
-                }, 5000);
+                }, 15000);
             }
             else {
                 if (_phoneCheck()) {
@@ -148,11 +184,7 @@
                         _phoneStatus('connected');
                     }, 2000);
                 }
-                else {
-                    _phoneStatus('ready');
-                }
             }
-
         });
 
         $(rootNode + ' form').on('keyup', 'input.phoneNumber', function (e) {
@@ -164,13 +196,14 @@
             e.preventDefault();
 
             var val = _phoneNumber();
-            val = val.replace(/[\(\)\s\-]*/g, '');
+            val = val.replace(/[\(\)\s\-\+]*/g, '').replace(/^1/,'');
 
-            if (val.length === 10 || val.length === 11) {
+            if (/\b\d{10}\b/.test(val)) {
                 _phoneStatus('ready');
+                _phoneValid(true);
             }
             else {
-                console.log('phone number should be 10 or 11 number', val.length, val);
+                console.log('phone [' + val + '] length must be 10: ' + val.length);
             }
 
             return false;
