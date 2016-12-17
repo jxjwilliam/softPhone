@@ -2,7 +2,7 @@
 
 To start:
 ```bash
-$ git clonehttps://github.com/jxjwilliam/softPhone.git
+$ git clone https://github.com/jxjwilliam/softPhone.git
 ```
 
 the entry point is the <strong>index.html</strong>

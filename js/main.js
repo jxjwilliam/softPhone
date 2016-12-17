@@ -6,6 +6,8 @@
      */
     var rootNode = '#phoneWiget';
 
+    var dials = ['2123450556'];
+
     function _phoneNumber(number, reset) {
         var phoneNumber = rootNode + ' input.phoneNumber';
         if (reset) {
@@ -24,6 +26,8 @@
     function _phoneCheck() {
         var val = _phoneNumber();
         if (val.length === 10 || val.length === 11) {
+
+            dials.push(val);
             return true;
         }
         return false;
@@ -99,6 +103,7 @@
                 else {
                     _phoneStatus('mute');
                 }
+                _dialButton();
             }
             else if ($(ctrl).hasClass('hold')) {
                 if (/hold/i.test(_phoneStatus())) {
@@ -107,16 +112,15 @@
                 else {
                     _phoneStatus('hold');
                 }
+                _dialButton();
             }
             else if ($(ctrl).hasClass('redial')) {
-                if (/connecting/i.test(_phoneStatus())) {
-                    _phoneStatus('ready');
-                }
-                else {
-                    _phoneStatus('connecting');
-                }
+                var curPhone = _phoneNumber();
+                var indx = dials.indexOf(p) - 1;
+                var prePhone = dials[indx > 0 ? indx : 0]
+                _phoneNumber(prePhone);
+                _phoneStatus('ready');
             }
-            _dialButton();
         });
 
         $(rootNode + ' div.dialButton').on('click', function (e) {
@@ -146,7 +150,9 @@
                     setTimeout(function () {
                         SoftPhoneTool.timeCalculater(rootNode + ' span.timer');
                         _phoneStatus('connected');
-                    }, 2000);
+
+                        _ctrl();
+                    }, 1000);
                 }
                 else {
                     _phoneStatus('ready');
