@@ -51,8 +51,9 @@ body {
     vertical-align: middle;
     color: #fff;
     text-align: center;
-    cursor: pointer;
+    width: 100%;
 }
+
 .dialing {
     background-color: red;
 }
@@ -80,7 +81,7 @@ div.status.endCall {
     color: red;
 }
 
-.callControl {
+button.callControl {
     background-color: #3493cd;
     border: 1px solid #3aa3e3;
     text-shadow: 1px 1px #2a76a4;
@@ -88,5 +89,13 @@ div.status.endCall {
     vertical-align: middle;
     color: #fff;
     text-align: center;
-    cursor: pointer;
+    width: 100%;
+}
+
+.phoneInValid {
+    color: red;
+}
+
+.glyphicon {
+    font-size: 30px;
 }

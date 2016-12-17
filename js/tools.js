@@ -1,10 +1,11 @@
 var SoftPhoneTool = (function () {
 
     var timer = 0;
+    var isPaused = false;
 
     function timeCalculater(displayAt) {
 
-        if($(displayAt).length === 0) {
+        if ($(displayAt).length === 0) {
             return;
         }
         var seconds, minutes, hours, divider, currentTimeString;
@@ -12,27 +13,29 @@ var SoftPhoneTool = (function () {
         divider = 60;
 
         timer = setInterval(function () {
-            seconds++;
-            minutes += Math.floor(seconds / divider);
-            hours += Math.floor(minutes / divider);
-            if (seconds % divider === 0) {
-                seconds = 0;
+
+            if (!isPaused) {
+                seconds++;
+                minutes += Math.floor(seconds / divider);
+                hours += Math.floor(minutes / divider);
+                if (seconds % divider === 0) {
+                    seconds = 0;
+                }
+                if (minutes % divider === 0) {
+                    minutes = 0;
+                }
+
+                seconds = seconds.toString().length === 1 ? '0' + seconds : seconds;
+
+                currentTimeString = [
+                    hours ? (hours + ":") : '',
+                    minutes ? (minutes + ":") : '',
+                    seconds
+                ].join('');
+
+                //console.log(currentTimeString);
+                $(displayAt).html(currentTimeString);
             }
-            if (minutes % divider === 0) {
-                minutes = 0;
-            }
-
-            seconds = seconds.toString().length===1 ? '0'+seconds : seconds;
-
-            currentTimeString = [
-                hours ? (hours + ":") : '',
-                minutes ? (minutes + ":") : '',
-                seconds
-            ].join('');
-
-            //console.log(currentTimeString);
-            $(displayAt).html(currentTimeString);
-
         }, 1000);
     };
 
@@ -42,8 +45,13 @@ var SoftPhoneTool = (function () {
         $(displayAt).html('');
     }
 
+    function pauseTimer(flag) {
+        isPaused = flag;
+    }
+
     return {
         timeCalculater: timeCalculater,
-        stopTimer: stopTimer
+        stopTimer: stopTimer,
+        pauseTimer: pauseTimer
     }
 })();
