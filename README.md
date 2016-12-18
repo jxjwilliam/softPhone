@@ -3,9 +3,11 @@
 To start:
 ```bash
 $ git clone https://github.com/jxjwilliam/softPhone.git
+$ cd softPhone
+$ open index.html
 ```
 
-the entry point is the <strong>index.html</strong>
+The entry point is the <strong>index.html</strong>
 
 
 Notice
