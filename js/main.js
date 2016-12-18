@@ -181,7 +181,8 @@
                     curPhone = curPhone.replace(/[\(\)\s\-\+]*/g, '').replace(/^1/, '');
                     indx = dials.indexOf(curPhone) - 1;
                     if(indx === -2) { //if curPhone exist and is invalid, or new input
-                    indx = -1;
+                        indx = -1;
+                    }
                 }
                 else {
                     curPhone = dials[dials.length - 1];
