@@ -9,7 +9,7 @@
     var dials = ['2123450556', '8006668888', '3481238900', '7185340102'];
 
     function _phoneFormat(str) {
-        if (str.length === 10) {
+        if (str && str.length === 10) {
             return "+1 (" + str.substr(0, 3) + ") " + str.substr(3, 3) + " - " + str.substr(6);
         }
         return str;
@@ -180,6 +180,8 @@
                 if (curPhone) {
                     curPhone = curPhone.replace(/[\(\)\s\-\+]*/g, '').replace(/^1/, '');
                     indx = dials.indexOf(curPhone) - 1;
+                    if(indx === -2) { //if curPhone exist and is invalid, or new input
+                    indx = -1;
                 }
                 else {
                     curPhone = dials[dials.length - 1];
