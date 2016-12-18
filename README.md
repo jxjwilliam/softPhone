@@ -12,7 +12,7 @@ The entry point is the <strong>index.html</strong>
 
 Notice
 =======
-1. the phone number must be 10 (e.g. 212-999-8888) or 11 (e.g. 1-212-888-9999)
-1. use jQuery to make the DOM process quickly.
+1. the phone number must be valid: e.g. 212-999-8888 or 1-212-888-9999
+1. use jQuery to make the DOM process easily and quickly.
 1. use twitter-bootstrap and font-awesome for grid-layout, responsive design.
-
+1. the main.js is in a IIFE, no global variable, and the wiget can be reusable.
